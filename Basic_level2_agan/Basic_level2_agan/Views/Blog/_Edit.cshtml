@@ -1,0 +1,216 @@
+﻿@model Basic_level2_agan.Models.Blog
+<!DOCTYPE html>
+<html>
+<head>
+    <title>edit blogs</title>
+    <style>
+        .card-body {
+            padding-left: 20px;
+        }
+
+        .form-control {
+            max-width: 100%;
+        }
+        .card {
+            background: #696969;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+   
+        .card-header {
+            background: #CCCCCC;
+            height:40px;
+        }
+        .card-header h3 {
+                margin: 0px !important;
+                padding-right: 0px !important;
+        }
+        .card-body{
+            background:white;
+        }
+        .card-footer {
+            background: #CCCCCC;
+            height:50px;
+            padding-top:10px;
+            padding-bottom:10px;
+        }
+        .submit {
+           background:green;
+           color:white; 
+        }
+       .submit:hover {
+                background: white;
+                color: green;
+       }
+        .reset {
+          background:blue;
+          color:white;
+        }
+        .reset:hover
+        {
+            background:white;
+            color:blue;
+        }
+        .form-group
+        {
+            margin:0px;
+        }
+       .cach
+       {
+           margin-bottom:20px;
+       }
+    </style>
+
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+@Html.AntiForgeryToken()
+
+                <div style="background:white;">
+
+                    <div class="card">
+                        <div class="row" >
+                            <div class="card-header col-md-12" >
+                                <h3 >Edit Blogs</h3>
+                            </div>
+                            <div class="card-body col-md-12 ">
+                                @Html.ValidationSummary(true)
+                                @Html.HiddenFor(model => model.id)
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        @Html.Label("Tiêu Đề")
+                                        @Html.TextAreaFor(model => model.tin, new { @class = " form-control" })
+                                        @Html.ValidationMessageFor(model => model.tin)
+                                    </div>
+                                </div>
+                                <div class="cach"></div>
+
+                                <div class="row ">
+                                    <div class="form-group col-md-12">
+                                        @Html.Label("Mô Tả Ngắn")
+                                        @Html.TextAreaFor(model => model.motangan, new { @class = " form-control ", @rows = 6 })
+                                    </div>
+                                </div>
+                                <div class="cach"></div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        @Html.Label("Chi Tiết")
+                                        @Html.TextAreaFor(model => model.chitiet, new { @class = " form-control", @rows = 6 })
+                                    </div>
+                                </div>
+                                <div class="cach"></div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        @Html.Label("Hình Ảnh")
+                                        <input type="submit" value="Chọn Tệp" class="btn btn-default" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    @Html.Label("Không có tệp nào được chọn", new { @style = "margin-left:15px;" })
+                                </div>
+                                <div class="cach"></div>
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        @Html.Label("Trạng Thái", new { @style = "margin-left:15px;" })
+                                    </div>
+                                </div>
+
+                                <div class=" radio row">
+                                    <div class="col-md-2">
+                                        @Html.RadioButtonFor(model => model.trangThai, "Yes")
+                                        @Html.Label("Yes")
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.RadioButtonFor(model => model.trangThai, "No")
+                                        @Html.Label("No")
+                                    </div>
+
+                                    @Html.ValidationMessageFor(model => model.trangThai)
+
+                                </div>
+                                <div class="cach"></div>
+
+                                <div class="row">
+                                    @Html.Label("Vị Trí", new { @style = "margin-left:15px;" })
+                                </div>
+                                <div class="row">
+                                    <div class="form-group ">
+                                        <div class="col-md-2">
+                                            <input type="checkbox" name="viTri" value="VietNam">Việt Nam
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input type="checkbox" name="viTri" value="ChauA">Châu Á
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input type="checkbox" name="viTri" value="ChauAu">Châu Âu
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input class="col-md-2" type="checkbox" name="viTri" value="ChauMy">Châu Mỹ
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cach"></div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.Label("Loại")
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.Label("Ngày Public")
+                                    </div>
+                                </div>
+                                <div class="row"style="padding-bottom:20px";>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @{ List<SelectListItem> listItems = new List<SelectListItem>();
+                                                listItems.Add(new SelectListItem
+                                                {
+                                                    Text = "Kinh Doanh",
+                                                    Value = "Kinh Doanh"
+                                                });
+                                                listItems.Add(new SelectListItem
+                                                {
+                                                    Text = "Thế Giới",
+                                                    Value = "Thế Giới",
+                                                    Selected = true
+                                                });
+                                                listItems.Add(new SelectListItem
+                                                {
+                                                    Text = "Thời Sự",
+                                                    Value = "Thời Sự"
+                                                }); }
+
+                                            @Html.DropDownListFor(model => model.loai, listItems, "-- Select Status --", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.loai)
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(mdoel => Model.ngayPublic, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                                            @*@Html.EditorFor(model => model.ngayPublic, new { @class ="form-control", @type = "date"  })*@
+                                            @Html.ValidationMessageFor(model => model.ngayPublic)
+                                        </div>
+                                    </div>
+                                </div>                                  
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="form-group text-center">
+                                    <div class="row col-md-12">
+                                            <input class="submit btn btn-primary" type="submit" value="Submit"/>
+                                            <input class="reset btn btn-primary"type="reset" value="Clear" />                                             
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
+</body>
+</html>
+
